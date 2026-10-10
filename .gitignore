@@ -6,4 +6,3 @@ __pycache__/
 .env.*
 .pytest_cache/
 node_modules/
-package-lock.json
