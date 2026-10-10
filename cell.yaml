@@ -1,0 +1,115 @@
+# Projects cell: projects and their repositories, portfolio contexts, work items (epics and stories) and links.
+# goal_id, goal_task_id and task_id point at other cells; they are plain ids (no cross-cell foreign key).
+cell: projects
+title: Projects and portfolio
+port: 3621
+resources:
+  project:
+    table: projects
+    plural: projects
+    graph: [name, slug, status, category, domain]
+    filters: [status, category, type, domain, priority, parent_project_id]
+    fields:
+      name: {type: text, required: true, max_length: 500}
+      slug: {type: text, required: true, max_length: 200, unique: true}
+      description: {type: text}
+      category: {type: enum, values: [product, client, internal, experiment, portfolio, open_source], default: product}
+      type: {type: text, max_length: 100}
+      status: {type: enum, values: [idea, planning, active, paused, completed, abandoned, archived], default: idea}
+      priority: {type: int, default: 3}
+      start_date: {type: date}
+      target_launch: {type: date}
+      launched_at: {type: date}
+      completed_at: {type: date}
+      progress_percent: {type: int, default: 0, min: 0, max: 100}
+      phase: {type: text, max_length: 200}
+      revenue_model: {type: text}
+      monthly_revenue: {type: real, default: 0}
+      total_revenue: {type: real, default: 0}
+      tech_stack: {type: text}
+      repo_url: {type: text}
+      live_url: {type: text}
+      docs_url: {type: text}
+      notes: {type: text}
+      color: {type: text, max_length: 40}
+      parent_project_id: {type: ref, to: project}
+      task_count: {type: int, default: 0}
+      completed_count: {type: int, default: 0}
+      archived_at: {type: timestamp}
+      domain: {type: text, max_length: 200}
+  project-repo:
+    table: project_repos
+    plural: project-repos
+    filters: [project_id, role, is_primary]
+    unique: [[project_id, repo_name]]
+    fields:
+      project_id: {type: ref, to: project}
+      repo_name: {type: text, required: true, max_length: 300}
+      repo_url: {type: text}
+      role: {type: enum, values: [frontend, backend, fullstack, docs, infra, script, mobile, other], default: fullstack}
+      language: {type: text, max_length: 100}
+      is_primary: {type: bool, default: false}
+  portfolio-context:
+    table: portfolio_contexts
+    plural: portfolio-contexts
+    graph: [name, slug, context_type, status]
+    filters: [context_type, scope, status, parent_context_id]
+    fields:
+      slug: {type: text, required: true, max_length: 200, unique: true}
+      name: {type: text, required: true, max_length: 500}
+      context_type: {type: enum, required: true, values: [personal, hobby, learning, freelance, startup, venture, client_engagement, internal, business_system, workspace, role_capability, unclassified]}
+      scope: {type: enum, values: [personal, professional, client, mixed], default: personal}
+      parent_context_id: {type: ref, to: portfolio-context}
+      description: {type: text}
+      source_path: {type: text}
+      source: {type: text, default: manual, max_length: 200}
+      status: {type: enum, values: [planned, active, paused, completed, archived], default: active}
+  project-context-link:
+    table: project_context_links
+    plural: project-context-links
+    filters: [project_id, context_id, relation_type]
+    unique: [[project_id, context_id]]
+    fields:
+      project_id: {type: ref, to: project, required: true}
+      context_id: {type: ref, to: portfolio-context, required: true}
+      relation_type: {type: enum, values: [primary, supporting], default: primary}
+      weight: {type: real, default: 1, min: 0.0001}
+      source: {type: text, default: manual, max_length: 200}
+  work-item:
+    table: work_items
+    legacy_table: portfolio_work_items
+    plural: work-items
+    graph: [title, item_type, status, project_id]
+    filters: [item_type, status, goal_id, project_id, parent_item_id, source_key]
+    fields:
+      item_type: {type: enum, required: true, values: [epic, story]}
+      title: {type: text, required: true, max_length: 500}
+      description: {type: text}
+      goal_id: {type: bigint}
+      project_id: {type: ref, to: project, required: true}
+      parent_item_id: {type: ref, to: work-item}
+      status: {type: enum, values: [todo, in_progress, done, blocked, cancelled], default: todo}
+      progress_percent: {type: int, default: 0, min: 0, max: 100}
+      weight: {type: real, default: 1, min: 0.0001}
+      source_key: {type: text, required: true, max_length: 300, unique: true}
+      source: {type: text, default: manual, max_length: 200}
+  work-item-task-link:
+    table: work_item_task_links
+    plural: work-item-task-links
+    filters: [work_item_id, task_id, relation_type]
+    unique: [[work_item_id, task_id]]
+    fields:
+      work_item_id: {type: ref, to: work-item, required: true}
+      task_id: {type: bigint, required: true}
+      relation_type: {type: enum, values: [implements, supports], default: implements}
+      weight: {type: real, default: 1, min: 0.0001}
+  work-item-goal-task-link:
+    table: work_item_goal_task_links
+    plural: work-item-goal-task-links
+    filters: [work_item_id, goal_task_id, relation_type]
+    unique: [[work_item_id, goal_task_id]]
+    fields:
+      work_item_id: {type: ref, to: work-item, required: true}
+      goal_task_id: {type: bigint, required: true}
+      relation_type: {type: enum, values: [implements, supports], default: implements}
+      weight: {type: real, default: 1, min: 0.0001}

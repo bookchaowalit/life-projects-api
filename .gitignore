@@ -1,0 +1,9 @@
+.venv/
+.runtime/
+__pycache__/
+*.egg-info/
+.env
+.env.*
+.pytest_cache/
+node_modules/
+package-lock.json
