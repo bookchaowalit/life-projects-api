@@ -74,7 +74,7 @@ def db(argv: list[str] | None = None) -> int:
     sub = parser.add_subparsers(dest="command", required=True)
     sub.add_parser("migrate")
     prov = sub.add_parser("provision")
-    prov.add_argument("--project", default=f"solo-{spec.name}")
+    prov.add_argument("--project", default=spec.root.name)  # Neon project = repository name
     prov.add_argument("--region", default="aws-ap-southeast-1")
     args = parser.parse_args(argv)
     if args.command == "provision":
