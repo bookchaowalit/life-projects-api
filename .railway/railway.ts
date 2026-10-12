@@ -1,6 +1,6 @@
 import { defineRailway, project, service } from "railway/iac";
 
-// solo-projects: the Projects and portfolio cell. Variables stay unmanaged (secrets live in Railway only).
+// projects-cell: the Projects and portfolio cell. Variables stay unmanaged (secrets live in Railway only).
 // projects-api sleeps when idle (Railway Serverless) and wakes on the next request.
 // projects-publisher is a cron sweep of the outbox that exits after each run.
 // Every service runs in Singapore next to Neon (aws-ap-southeast-1) and empire-platform; the IaC does not
@@ -16,7 +16,7 @@ export default defineRailway(() => {
     deploy: { cronSchedule: "*/15 * * * *", restartPolicyType: "NEVER" },
   });
 
-  return project("solo-projects", {
+  return project("projects-cell", {
     variables: { managed: false },
     resources: [api, publisher],
   });
