@@ -9,6 +9,9 @@
   an applied file, add a new numbered one.
 - `src/cellkit` is vendored from solo-cell-kit: change it there, then run
   `cellkit-new . --sync` here. Cell-specific code lives in `src/solo_projects/`.
+- `projects-mcp` (stdio, see `.mcp.json`) is this cell's MCP server: tools `projects.<resource>.list|get|create|update|delete`
+  call the cell API with the caller's token (`EMPIRE_TOKEN`, `EMPIRE_TOKEN_FILE` or the `owner-cli` automation token;
+  URL from `EMPIRE_PROJECTS_API`). Set `EMPIRE_MCP_READONLY=1` for list/get only. Never add actor, workspace or token arguments.
 - Deploys are manual (`railway up`) and change production; verify `/health` and one
   authorized read afterwards.
 - Keep the solo-empire registry entry (`projects` in

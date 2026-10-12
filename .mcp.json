@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "projects": {
+      "command": ".venv/bin/projects-mcp",
+      "args": []
+    }
+  }
+}
