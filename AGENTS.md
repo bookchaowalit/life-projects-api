@@ -7,10 +7,11 @@
   the hosted database or the hosted platform.
 - Run `.venv/bin/pytest -q` before committing. Migrations are append-only: never edit
   an applied file, add a new numbered one.
-- `src/cellkit` is vendored from solo-cell-kit: change it there, then run
-  `cellkit-new . --sync` here. Cell-specific code lives in `src/solo_projects/`.
+- `src/cellkit` is this repository's own service code (first generated from `cell.yaml`; the shared
+  generator was retired on 2026-10-12). Change it here; there is nothing upstream to sync from.
+  Cell-specific code lives in `src/solo_projects/`.
 - `projects-mcp` (stdio, see `.mcp.json`) is this cell's MCP server: tools `projects.<resource>.list|get|create|update|delete`
-  call the cell API with the caller's token (`EMPIRE_TOKEN`, `EMPIRE_TOKEN_FILE` or the `owner-cli` automation token;
+  call the cell API with the caller's token (`EMPIRE_TOKEN`, `EMPIRE_TOKEN_FILE` or the `owner-mcp` automation token;
   URL from `EMPIRE_PROJECTS_API`). Set `EMPIRE_MCP_READONLY=1` for list/get only. Never add actor, workspace or token arguments.
 - Deploys are manual (`railway up`) and change production; verify `/health` and one
   authorized read afterwards.

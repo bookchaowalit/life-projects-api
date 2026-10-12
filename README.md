@@ -1,7 +1,8 @@
 # solo-projects
 
 The Projects and portfolio cell: its own API (Railway, serverless) and its own Neon
-database, made from `cell.yaml` with [solo-cell-kit](../solo-cell-kit). It
+database, described by `cell.yaml` and served by the code in `src/cellkit/`, which
+this repository owns. It
 reuses empire-platform for identity, authorization, executions and audit over
 HTTP with the caller's token.
 
