@@ -14,7 +14,7 @@ Per resource ``<cell>.<resource>.<operation>``::
     update  id, expected_version, the resource's fields          PATCH  /v1/<plural>/{id}
     delete  id                                                   DELETE /v1/<plural>/{id}
 
-Configuration follows the other clients (solo-ops ``cell_store.py``, solo-mcp ``cell-store.ts``)::
+Configuration follows the other clients (ops-toolkit ``cell_store.py``, mcp-aggregator ``cell-store.ts``)::
 
     EMPIRE_<CELL>_API=https://...        env, else the owner-only ~/.config/empire-platform/client.env
     EMPIRE_TOKEN=...                     the bearer, else
