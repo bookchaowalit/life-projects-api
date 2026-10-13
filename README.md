@@ -1,5 +1,4 @@
-# projects-cell
-
+# life-projects-api
 The Projects and portfolio cell: its own API (Railway, serverless) and its own Neon
 database, described by `cell.yaml` and served by the code in `src/cellkit/`, which
 this repository owns. It
@@ -8,9 +7,9 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `projects-cell`, service `projects-api` (Serverless) |
+| API | Railway project `life-projects-api`, service `projects-api` (Serverless) |
 | Publisher | service `projects-publisher` (Railway cron, `*/15 * * * *`) |
-| Data | Neon project `projects-cell`, database `projects` |
+| Data | Neon project `life-projects-api`, database `projects` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`projects`) |
 
 ## API
