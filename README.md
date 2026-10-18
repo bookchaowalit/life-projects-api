@@ -36,5 +36,6 @@ NEON_API_KEY=... .venv/bin/projects-db provision
 npm install && railway config apply && railway up --ci --service projects-api
 ```
 
-Railway variables: `PROJECTS_DB_MODE=hosted`, `PROJECTS_DB_URL_API`,
+Railway variables: `SENTRY_DSN` (error reporting; unset = off, see
+`src/cellkit/_sentry.py`), `PROJECTS_DB_MODE=hosted`, `PROJECTS_DB_URL_API`,
 `PROJECTS_JWT_PUBLIC_KEY_PEM`, `PROJECTS_JWT_ISSUER`, `EMPIRE_PLATFORM_URL`, and for the publisher `PROJECTS_DB_URL_PUBLISHER` and `PROJECTS_PUBLISHER_TOKEN`.
