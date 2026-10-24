@@ -158,3 +158,10 @@ Big Loop Plan Wave 2 (solo-empire `repository-catalog/roadmaps/BIG-LOOP-PLAN-202
 |---|---|---|---|---|
 | Implemented (DoD) | Reviewer (checker) | Fresh Claude reviewer / 2026-10-22 | see Wave 2 report | CI run of the pushed tip |
 | Implemented (DoD) | Approver | Owner | pending | Wave 2 report |
+
+## Review (2026-10-24): changes requested
+
+Checker: independent Claude reviewer subagent (`solo:solo-reviewer`, Sonnet, read-only, no maker context). Status unchanged until fixed.
+
+- Tests run by the checker: .venv/bin/pytest -q: 190 passed, 19 skipped
+- Gap: ACs are tested, but the date-range risk row and range wording are false (no `ranges` in cell.yaml; range contract test skips). Remove it.
