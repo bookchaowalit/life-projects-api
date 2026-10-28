@@ -23,7 +23,7 @@ owner: Product owner (Book Dev)
 ## 3. สิ่งที่ทำได้จริงตอนนี้
 
 - API `/v1/projects`, `/v1/project-repos`, `/v1/portfolio-contexts`, `/v1/project-context-links`, `/v1/work-items`, `/v1/work-item-task-links`, `/v1/work-item-goal-task-links`
-- Publisher `projects-publisher` (cron `*/15 * * * *`) ตาม README
+- Publisher `projects-publisher` (cron `5 * * * *`) ตาม README
 - `goal_id`, `goal_task_id`, `task_id` เป็น id อ้าง cell อื่น
 
 ## 4. หลักฐานสถานะ
